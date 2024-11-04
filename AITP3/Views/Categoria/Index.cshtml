@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AITP3.Models.Categoria>
+
+@{
+    ViewBag.Title = "Categorias";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-black">Categorias</h2>
+        @Html.ActionLink("Criar Nova Categoria", "Create", null, new { @class = "btn btn-success" })
+    </div>
+
+    <table class="table table-hover shadow-sm">
+        <thead class="thead-light">
+            <tr>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-primary btn-sm" }) |
+                        @Html.ActionLink("Deletar", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

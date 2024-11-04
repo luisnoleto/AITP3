@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNet.Identity
+@model AITP3.Models.Cart
+
+@{
+    ViewBag.Title = "Carrinho";
+}
+
+<div class="container mt-5">
+    <h2 class="text-black">Carrinho</h2>
+
+    @if (Model.Items.Any())
+    {
+        <table class="table table-hover shadow-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Titulo</td>
+                        <td>@item.Autor</td>
+                        <td>@item.Valor.ToString("C")</td>
+                        <td>
+                            @using (Html.BeginForm("RemoveFromCart", "Cart", FormMethod.Post))
+                            {
+                                <input type="hidden" name="livroId" value="@item.Id" />
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Remover</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        using (Html.BeginForm("CreateEmprestimo", "Emprestimo", FormMethod.Post))
+        {
+            <input type="hidden" name="usuarioId" value="@User.Identity.GetUserId()" />
+            foreach (var item in Model.Items)
+            {
+                <input type="hidden" name="selectedLivros" value="@item.Id" />
+            }
+            <button type="submit" class="btn btn-primary">Fazer Empréstimo</button>
+        }
+    }
+    else
+    {
+        <div class="alert alert-info mt-4">Seu carrinho está vazio.</div>
+    }
+</div>

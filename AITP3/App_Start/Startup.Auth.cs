@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using AITP3.Models;
+using AITP3.DAL;
 
 namespace AITP3
 {
@@ -15,7 +16,7 @@ namespace AITP3
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure o contexto db, gerenciador de usuários e gerenciador de login para usar uma única instância por solicitação
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext(BibliotecaContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
@@ -54,15 +55,15 @@ namespace AITP3
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+              app.UseFacebookAuthentication(
+                 appId: "608435391557800",
+                 appSecret: "b8b3d7509fec45ca7e8ff9978f26fd78");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+              app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+              {
+                  ClientId = "564452403771-f98cqcksvd2na1lflmmut8b6pk2ahb9i.apps.googleusercontent.com",
+                  ClientSecret = "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"
+              });
         }
     }
 }

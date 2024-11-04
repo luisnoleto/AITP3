@@ -143,7 +143,6 @@ namespace AITP3.Controllers
         }
 
         //
-        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -151,24 +150,25 @@ namespace AITP3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    Nome = model.Nome,
+                    Sobrenome = model.Sobrenome,
+                    DataNascimento = model.DataNascimento,
+                    Email = model.Email,
+                    UserName = model.Email,
+                    TipoUsuario = TipoUsuario.Usuario
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // Para obter mais informações sobre como habilitar a confirmação da conta e redefinição de senha, visite https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Enviar um email com este link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirme sua conta", "Confirme sua conta clicando <a href=\"" + callbackUrl + "\">aqui</a>");
-
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
 
-            // Se chegamos até aqui, algo falhou, reexibir formulário
             return View(model);
         }
 
@@ -367,7 +367,15 @@ namespace AITP3.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                // Define o tipo de usuário como "Usuario" para novos logins externos
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    TipoUsuario = TipoUsuario.Usuario  // Define o usuário como "Usuario"
+                };
+
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -384,6 +392,7 @@ namespace AITP3.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+
 
         //
         // POST: /Account/LogOff

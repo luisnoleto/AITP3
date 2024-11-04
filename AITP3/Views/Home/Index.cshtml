@@ -2,21 +2,48 @@
     ViewBag.Title = "Início";
 }
 
-<div class="jumbotron">
-    <h1>Biblioteca Divas&Divos</h1>
-    <br/>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Bem-vindo</h2>
-        <br/>
-        <p>
-            Nossa biblioteca de emprestimos de livros foi criada com o intuito de ajudar a descentralização da compra de livros de grandes lojas para um modelo reutilizável de pequenos empreendimentos, reduzindo assim a dependencia em monopólios e trazendo acesso a cultura.
+<div class="container mt-5">
+    <div class="jumbotron text-center bg-light p-5 rounded">
+        <link href="~/Content/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+        <h1 class="display-4">Biblioteca Divas&Divos</h1><i class="bi bi-book-half"></i>
+        <p class="lead mt-3">Emprestamos livros para promover a leitura e a sustentabilidade.</p>
+        <hr class="my-4">
+        <p class="mb-4">
+            A biblioteca foi criada com o objetivo de descentralizar o consumo de livros e tornar o conhecimento acessível a todos.
         </p>
+        <a class="btn btn-primary btn-lg" href="/Acervo" role="button">Explorar o Acervo</a>
     </div>
-    <div class="col-md-4">
-        <h2>Desenvolvimento</h2>
-        <br/>
-        <p>Nossa querida biblioteca de emprestimos de livros foi criada como parte de um trabalho avaliativo no curso de Sistemas de Informação, na Unitins. Veja mais <a href="http://www.asp.net/mvc/tutorials/getting-started-with-ef-using-mvc/">sobre </a></</p>
+    <div class="row mt-4">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h3 class="card-title text-black">Bem-vindo</h3>
+                    <p class="card-text mt-3">
+                        Nossa biblioteca de empréstimos foi criada para oferecer um modelo sustentável de acesso à leitura. Reutilizando livros, queremos reduzir a dependência de monopólios e democratizar o acesso à cultura.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h3 class="card-title text-black">Desenvolvimento</h3>
+                    <p class="card-text mt-3">
+                        Este projeto é parte de um trabalho avaliativo do curso de Sistemas de Informação na Unitins. A biblioteca é um exemplo de como a tecnologia pode servir ao desenvolvimento educacional e cultural.
+                    </p>
+                    <a href="https://www.unitins.br/nPortal/" class="btn btn-link">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h3 class="card-title text-black">Nossos Objetivos</h3>
+                    <p class="card-text mt-3">
+                        Promover a leitura, apoiar pequenos empreendimentos e incentivar a reutilização são os pilares da nossa missão. Queremos ser uma alternativa para o consumo consciente e acessível de literatura.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

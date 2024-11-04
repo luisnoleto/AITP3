@@ -2,36 +2,134 @@
 @{
     ViewBag.Title = "Registrar";
 }
+
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title.</h2>
     <h3>Associe a sua conta @ViewBag.LoginProvider.</h3>
 
-    @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
-    {
-        @Html.AntiForgeryToken()
+    <section id="externalLoginForm">
+        @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
 
-        <h4>Formulário de associação</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <p class="text-info">
-            Você se autenticou com êxito com <strong>@ViewBag.LoginProvider</strong>.
-            Insira um nome de usuário para este site abaixo e clique no botão Registrar para concluir
-            o logon.
-        </p>
-        <div class="row">
-            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            <h4>Formulário de associação</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <p class="text-info">
+                Você se autenticou com êxito com <strong>@ViewBag.LoginProvider</strong>.
+                Insira um nome de usuário para este site abaixo e clique no botão Registrar para concluir
+                o logon.
+            </p>
+            <div class="row">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="offset-md-2 col-md-10">
-                <input type="submit" class="btn btn-outline-dark" value="Registrar" />
+            <div class="row">
+                <div class="offset-md-2 col-md-10">
+                    <input type="submit" class="btn btn-outline-dark" value="Registrar" />
+                </div>
             </div>
-        </div>
-    }
+        }
+    </section>
 </main>
+
+<style>
+    /* Configurações gerais de fundo e fonte */
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Centralização do container principal */
+    main {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    /* Estilos de formulário */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    /* Centralizar os campos de input e o texto */
+    .form-control {
+        width: 100%;
+        text-align: center;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        box-sizing: border-box;
+        margin-left: 140px;
+    }
+
+    /* Estilo para os botões */
+    .btn-outline-dark {
+        width: 100%;
+        margin-top: 20px;
+        border: 1px solid #343a40;
+        color: #343a40;
+        background-color: transparent;
+        padding: 10px 15px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+        .btn-outline-dark:hover {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    /* Estilo para os checkboxes */
+    .checkbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    /* Bordas e espaçamento para a seção de formulário */
+    hr {
+        border: none;
+        border-top: 1px solid #e0e0e0;
+        margin: 20px 0;
+    }
+
+    p, label {
+        color: #6c757d;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    /* Ajustes para as linhas e colunas */
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    .col-md-10, .col-md-2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

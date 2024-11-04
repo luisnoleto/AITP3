@@ -1,0 +1,37 @@
+﻿@model AITP3.Models.Emprestimo
+
+@{
+    ViewBag.Title = "Detalhes do Empréstimo";
+}
+
+<h2>Detalhes do Empréstimo</h2>
+
+<div>
+    <h4>Empréstimo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Data do Empréstimo</dt>
+        <dd>@Html.DisplayFor(model => model.DataEmprestimo.ToString("dd/MM/yyyy"))</dd>
+
+        <dt>Data de Devolução</dt>
+        <dd>@Html.DisplayFor(model => model.DataDevolucao.ToString("dd/MM/yyyy"))</dd>
+
+        <dt>Valor Total</dt>
+        <dd>@Html.DisplayFor(model => model.ValorTotal.ToString("C"))</dd>
+
+        <dt>Livros</dt>
+        <dd>
+            <ul>
+                @foreach (var emprestimoLivro in Model.EmprestimoLivros)
+                {
+                    <li>@emprestimoLivro.Livro.Titulo - @emprestimoLivro.Livro.Autor</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar para a Lista", "Index")
+</p>

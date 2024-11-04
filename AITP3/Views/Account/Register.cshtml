@@ -3,38 +3,141 @@
     ViewBag.Title = "Registre-se";
 }
 
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
 
+<style>
+    /* Configurações gerais de fundo e fonte */
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Centralização do container principal */
+    main {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    /* Estilos de formulário */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    /* Centralizar os campos de input e o texto */
+    .form-control {
+        width: 100%;
+        text-align: center;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        box-sizing: border-box;
+        margin-left: 140px;
+    }
+
+    /* Estilo para os botões */
+    .btn-outline-dark {
+        width: 100%;
+        margin-top: 20px;
+        border: 1px solid #343a40;
+        color: #343a40;
+        background-color: transparent;
+        padding: 10px 15px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+        .btn-outline-dark:hover {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    /* Estilo para os checkboxes */
+    .checkbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    /* Bordas e espaçamento para a seção de formulário */
+    hr {
+        border: none;
+        border-top: 1px solid #e0e0e0;
+        margin: 20px 0;
+    }
+
+    p, label {
+        color: #6c757d;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    /* Ajustes para as linhas e colunas */
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    .col-md-10, .col-md-2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
         <h4>Criar uma nova conta.</h4>
         <hr />
         @Html.ValidationSummary("", new { @class = "text-danger" })
-        <div class="row">
-            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nome)
+            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
         </div>
-        <div class="row">
-            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
-            <div class="col-md-10">
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Sobrenome)
+            @Html.TextBoxFor(m => m.Sobrenome, new { @class = "form-control" })
         </div>
-        <div class="row">
-            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 col-form-label" })
-            <div class="col-md-10">
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.DataNascimento)
+            @Html.TextBoxFor(m => m.DataNascimento, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
         </div>
-        <div class="row">
-            <div class="offset-md-2 col-md-10">
-                <input type="submit" value="Registrar" class="btn btn-outline-dark" />
-            </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+
+        <input type="submit" value="Registrar" class="btn btn-outline-dark" />
     }
 </main>
 

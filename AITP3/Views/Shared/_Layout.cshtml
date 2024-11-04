@@ -1,16 +1,57 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+@{
+    var isAuthenticated = User.Identity.IsAuthenticated;
+    var userId = User.Identity.GetUserId();
+    var userType = string.Empty;
+
+    if (isAuthenticated && userId != null)
+    {
+        using (var db = new AITP3.DAL.BibliotecaContext())
+        {
+            var user = db.Users.Find(userId);
+            userType = user?.TipoUsuario.ToString() ?? "";
+        }
+    }
+}
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Biblioteca Divas&Divos</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <style>
+        .custom-navbar {
+            background-color: #c9c9c9;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .custom-navbar .nav-link {
+                color: black; 
+            }
+
+                .custom-navbar .nav-link:hover {
+                    background-color: lavender;
+                    border-radius: 12px;
+
+                }
+
+            .custom-navbar .navbar-brand {
+                color: black;
+            }
+
+                .custom-navbar .navbar-brand:hover {
+                    background-color: lavender;
+                    border-radius: 12px;
+                }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-light custom-navbar">
         <div class="container">
             @Html.ActionLink("Divas&Divos", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar a navegação" aria-controls="navbarSupportedContent"
@@ -20,15 +61,21 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Página Inicial", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Acervo", "Books", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Categorias", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Minha Conta", "Account", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Emprestimos", "Purchase", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Meu Carrinho", "Checkout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Lista de Desejos", "Wishlist", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Administradores", "Admin", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Acervo de Livros", "Index", "Acervo", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @if (userType == "Administrador")
+                    {
+                        <li>@Html.ActionLink("Livros", "Index", "Livro", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Categorias", "Index", "Categoria", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+
+                    @if (isAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Meus Emprestimos", "Index", "Emprestimo", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Carrinho", "Index", "Cart", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
-                 @Html.Partial("_LoginPartial")
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
@@ -36,7 +83,12 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Biblioteca Divas&Divos - Tópicos 3</p>
+            <style>                p {
+                    text-align: center;
+                }
+            </style>
+            <link href="~/Content/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+            <p>&copy; @DateTime.Now.Year - Biblioteca Divas&Divos - Tópicos 3 <i class="bi-heart-fill"></i></p>
         </footer>
     </div>
 

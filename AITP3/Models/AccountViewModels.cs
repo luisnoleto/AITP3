@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AITP3.Models
@@ -64,6 +65,19 @@ namespace AITP3.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Nome")]
+        public string Nome { get; set; }
+
+        [Required]
+        [Display(Name = "Sobrenome")]
+        public string Sobrenome { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Data de Nascimento")]
+        public DateTime DataNascimento { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

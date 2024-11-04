@@ -1,0 +1,26 @@
+﻿@model AITP3.Models.Categoria
+
+@{
+    ViewBag.Title = "Deletar Categoria";
+}
+
+<div class="container mt-5">
+    <h2 class="text-danger">Deletar Categoria</h2>
+    <p>Tem certeza de que deseja excluir esta categoria?</p>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Nome:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Nome)</dd>
+            </dl>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Deletar</button>
+        @Html.ActionLink("Voltar à Lista", "Index", null, new { @class = "btn btn-secondary ml-2" })
+    }
+</div>

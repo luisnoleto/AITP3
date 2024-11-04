@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -6,28 +7,26 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AITP3.Models
 {
-    // É possível adicionar dados do perfil do usuário adicionando mais propriedades na sua classe ApplicationUser, visite https://go.microsoft.com/fwlink/?LinkID=317594 para obter mais informações.
-    public class ApplicationUser : IdentityUser
+    public enum TipoUsuario
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
-        {
-            // Observe que a authenticationType deve corresponder a uma definida em CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Adicionar declarações do usuário personalizadas aqui
-            return userIdentity;
-        }
+        Administrador,
+        Usuario
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationUser : IdentityUser
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
+        public string Nome { get; set; }
+        public string Sobrenome { get; set; }
+        public DateTime? DataNascimento { get; set; }
+        public virtual Endereco Endereco { get; set; }
+        public virtual ICollection<Emprestimo> Emprestimos { get; set; }
+        public virtual Cart Carrinho { get; set; } 
+        public TipoUsuario TipoUsuario { get; set; }
 
-        public static ApplicationDbContext Create()
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
-            return new ApplicationDbContext();
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            return userIdentity;
         }
     }
 }
