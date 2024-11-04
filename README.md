@@ -1,5 +1,5 @@
 # AITP3 - Biblioteca - Emprestimo de Livros
-
+# Atenção - Para iniciar corretamente: Executar Update-Package no Console de Gerenciador de Pacotes, Depois ir em Compilação > Limpar Solução, Compilação > Reconstruir Solução e Compilação > Compilar Solução 
 Foi desenvolvido um sistema de aluguel de livros, Você pode se cadastrar por externo (Google e Facebook) ou dentro do programa, ir para o acervo de livros e adicionar os que lhe interessar ao carrinho. No Carrinho voce pode ir para a confirmação do emprestimo, onde ele já coloca automaticamente a data do dia + 7 dias para o retorno dos livros, alem da lista de livros que você está alugando. Pode ir então em meus emprestimos para visualizar. 
 
 Existe também a tela de administradores, onde você pode gerenciar todos os livros, seus atributos e categorias.
