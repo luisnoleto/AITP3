@@ -25,25 +25,10 @@ Cart 1:1,
 EmprestimoLivro N:1 Emprestimo,
 EmprestimoLivro N:1 com Livro,
 
-ConnectionString do banco de dados usando o SQL EXPRESS com um banco criado vazio, AITP3
-
-web.config:
+ConnectionString do banco de dados usando o SQL EXPRESS com um banco criado vazio, AITP3. Foi alterado para LocalDB no github para o uso do professor.
 
   <connectionStrings>
     <add name="BibliotecaContext" connectionString="Data Source=NITROLUIS\SQLEXPRESS;Initial Catalog=AITP3;Integrated Security=True;Encrypt=False" providerName="System.Data.SqlClient" />
 </connectionStrings>
       
-<entityFramework>
-  <contexts>
-    <context type="AITP3.DAL.BibliotecaContext, AITP3">
-    </context>
-  </contexts>
-  <providers>
-    <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
-  </providers>
-</entityFramework>
 
-web.config em views:
- <connectionStrings>
-   <add name="BibliotecaContext" connectionString="Data Source=NITROLUIS\SQLEXPRESS;Initial Catalog=AITP3;Integrated Security=True;Encrypt=False" providerName="System.Data.SqlClient" />
- </connectionStrings>
