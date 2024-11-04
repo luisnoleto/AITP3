@@ -18,12 +18,12 @@ Senha:
 Usuario123!
 
 Relações
-Usuario (ApplicationUser) 1:N Emprestimos
-Emprestimos: N:N Livros
-Livro N:1 Categoria
-Cart 1:1
-EmprestimoLivro N:1 Emprestimo
-EmprestimoLivro N:1 com Livro
+Usuario (ApplicationUser) 1:N Emprestimos,
+Emprestimos: N:N Livros,
+Livro N:1 Categoria,
+Cart 1:1,
+EmprestimoLivro N:1 Emprestimo,
+EmprestimoLivro N:1 com Livro,
 
 ConnectionString do banco de dados usando o SQL EXPRESS com um banco criado vazio, AITP3
 
