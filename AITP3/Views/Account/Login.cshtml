@@ -134,6 +134,15 @@
             </p>
         }
     </section>
+
+    <hr />
+
+    <h4>Ou use uma conta externa:</h4>
+    <div>
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
 </main>
 
 @section Scripts {
