@@ -37,6 +37,10 @@
                 }
             </tbody>
         </table>
+        <div class="total">
+            <strong>Total: </strong>
+            @Model.Items.Sum(item => item.Valor).ToString("C")
+        </div>
 
         using (Html.BeginForm("CreateEmprestimo", "Emprestimo", FormMethod.Post))
         {

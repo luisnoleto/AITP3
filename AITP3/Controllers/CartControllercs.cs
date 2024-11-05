@@ -10,10 +10,9 @@ namespace AITP3.Controllers
     public class CartController : Controller
     {
         private BibliotecaContext db = new BibliotecaContext();
-
         public ActionResult Index()
         {
-            // Obtém o ID do usuário autenticado
+        
             string usuarioId = User.Identity.GetUserId();
             if (usuarioId == null) return RedirectToAction("Login", "Account");
 
@@ -21,9 +20,17 @@ namespace AITP3.Controllers
             var cart = db.Carts.Include(c => c.Items).SingleOrDefault(c => c.UsuarioId == usuarioId);
             if (cart == null)
             {
-                // Cria um carrinho vazio para o usuário, caso ainda não tenha um
+           
                 cart = new Cart { UsuarioId = usuarioId };
                 db.Carts.Add(cart);
+
+          
+                var usuario = db.Users.Find(usuarioId);
+                if (usuario != null)
+                {
+                    usuario.Carrinho = cart;
+                }
+
                 db.SaveChanges();
             }
 
@@ -33,11 +40,11 @@ namespace AITP3.Controllers
         [HttpPost]
         public ActionResult AddToCart(int id)
         {
-            // Obtém o ID do usuário autenticado
+          
             string usuarioId = User.Identity.GetUserId();
             if (usuarioId == null) return RedirectToAction("Login", "Account");
 
-            // Verifica se o livro existe
+
             var livro = db.Livros.Find(id);
             if (livro == null) return HttpNotFound();
 
@@ -47,9 +54,16 @@ namespace AITP3.Controllers
             {
                 cart = new Cart { UsuarioId = usuarioId };
                 db.Carts.Add(cart);
+
+              
+                var usuario = db.Users.Find(usuarioId);
+                if (usuario != null)
+                {
+                    usuario.Carrinho = cart;
+                }
             }
 
-            // Adiciona o livro ao carrinho e salva as alterações
+        
             cart.AddItem(livro);
             db.SaveChanges();
 
@@ -58,7 +72,7 @@ namespace AITP3.Controllers
 
         public ActionResult RemoveFromCart(int livroId)
         {
-            // Obtém o ID do usuário autenticado
+      
             string usuarioId = User.Identity.GetUserId();
             if (usuarioId == null) return RedirectToAction("Login", "Account");
 
@@ -66,17 +80,17 @@ namespace AITP3.Controllers
             var cart = db.Carts.Include(c => c.Items).SingleOrDefault(c => c.UsuarioId == usuarioId);
             if (cart != null)
             {
-                // Busca o item a ser removido
+           
                 var itemToRemove = cart.Items.FirstOrDefault(i => i.Id == livroId);
                 if (itemToRemove != null)
                 {
                     // Remove o item
                     cart.Items.Remove(itemToRemove);
-                    db.SaveChanges(); // Salva as alterações no banco de dados
+                    db.SaveChanges(); 
                 }
             }
 
-            return RedirectToAction("Index"); // Redireciona de volta para a página do carrinho
+            return RedirectToAction("Index"); 
         }
     }
 
